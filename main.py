@@ -9,9 +9,9 @@ import matplotlib.pyplot as plt
 
 # importowanie csv do ramki danych
 patients = pd.read_csv('data/cancer_patient_data_sets.csv')
-patients=patients.replace(to_replace="Low", value=1)
-patients=patients.replace(to_replace="Medium", value=2)
-patients=patients.replace(to_replace="High", value=3)
+patients=patients.replace(to_replace="Low", value=0)
+patients=patients.replace(to_replace="Medium", value=0)
+patients=patients.replace(to_replace="High", value=1)
 print(patients.head())
 print("Data imported correctly.")
 
@@ -78,4 +78,4 @@ y = patients.loc[:, 'Level'].to_numpy()
 print('Set of labels:\n', y)
 
 # podział zbioru na dane treningowe i testowe
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=12345) 
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=12345)
