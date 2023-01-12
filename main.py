@@ -123,7 +123,7 @@ plt.show()
 
 # MODEL 4 - neural network
 
-mlp = MLPClassifier(hidden_layer_sizes=(10, 5, 2), max_iter=1500)
+mlp = MLPClassifier(hidden_layer_sizes=(10, 5, 2), max_iter=250)
 accuracy = train_model(mlp, x_train, y_train, x_test)
 accuracy_compare['neural network'] = accuracy
 print("neural network", accuracy)
