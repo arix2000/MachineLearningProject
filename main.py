@@ -33,7 +33,7 @@ plt.xticks(np.arange(min(patients['Gender']), max(patients['Gender']) + 1, 1))
 plt.show()
 
 # palacze w grupie badawczej
-cancer_risk = patients['Smoking'].hist(bins=8)
+cancer_risk = patients['Smoking'].hist(bins=7)
 title = 'SMOKERS IN THE RESEARCH GROUP'
 plt.xlabel("level of smoking")
 plt.ylabel("number of people")
