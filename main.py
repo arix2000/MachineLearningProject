@@ -47,7 +47,10 @@ age_dist.set_title(title)
 plt.show()
 
 # usuwanie nieprzydatnych danych
-patients.drop(['index', 'Patient Id'], axis=1, inplace = True)
+patients.drop(['index', 'Patient Id', 'OccuPational Hazards', 'Genetic Risk', 'chronic Lung Disease', 'Balanced Diet', 'Obesity',
+     'Chest Pain', 'Coughing of Blood', 'Fatigue', 'Weight Loss', 'Shortness of Breath', 'Wheezing',
+     'Swallowing Difficulty',
+     'Clubbing of Finger Nails', 'Frequent Cold', 'Dry Cough'], axis=1, inplace = True)
 print(patients.head())
 print('Unneccesary data deleted!')
 
@@ -79,3 +82,66 @@ print('Set of labels:\n', y)
 
 # podział zbioru na dane treningowe i testowe
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=12345)
+
+
+# uniwersalna metoda do trenowania i oceny modeli
+
+def train_model(classifier, feature_vector_train, label, feature_vector_valid):
+    # trenuj model
+    classifier.fit(feature_vector_train, label)
+
+    # wygeneruj przewidywania modelu dla zbioru testowego
+    predictions = classifier.predict(feature_vector_valid)
+
+    # dokonaj ewaluacji modelu na podstawie danych testowych
+    scores = list(metrics.precision_recall_fscore_support(predictions, y_test))
+    score_vals = [scores[0][0], scores[1][0], scores[2][0], metrics.accuracy_score(predictions, y_test)]
+    return score_vals
+
+
+# MODEL 1 - regresja logistyczna
+accuracy = train_model(linear_model.LogisticRegression(max_iter=250), x_train, y_train, x_test)
+accuracy_compare = {'LR': accuracy}
+print ("LR: ", accuracy)
+
+# MODEL 2 - Support Vector Machine
+accuracy = train_model(svm.SVC(), x_train, y_train, x_test)
+accuracy_compare['SVM'] = accuracy
+print ("SVM:" , accuracy)
+
+# MODEL 3 - Random Forest Tree
+accuracy = train_model(ensemble.RandomForestClassifier(n_estimators=1, max_depth=1), x_train, y_train, x_test)
+accuracy_compare['RF'] = accuracy
+print ("RF: ", accuracy)
+
+# porównanie modeli
+df_compare = pd.DataFrame(accuracy_compare, index = ['precision', 'recall', 'f1 score', 'accuracy'])
+df_compare.plot(kind='bar')
+plt.show()
+
+
+# działania korygujące - zastosowanie sieci neuronowej
+
+# MODEL 4 - neural network
+from sklearn.neural_network import MLPClassifier
+mlp = MLPClassifier(hidden_layer_sizes=(10, 5, 2), max_iter=1500)
+accuracy = train_model(mlp, x_train, y_train, x_test)
+accuracy_compare['neural network'] = accuracy
+print ("neural network" , accuracy)
+
+# działania korygujące - hiperparametry
+
+# MODEL 5 - Support Vector Machine
+accuracy = train_model(svm.SVC(gamma='auto'), x_train, y_train, x_test)
+accuracy_compare['SVM'] = accuracy
+print ("SVM gamma='auto'" , accuracy)
+
+# MODEL 6 - Support Vector Machine
+accuracy = train_model(svm.SVC(kernel='sigmoid'), x_train, y_train, x_test)
+accuracy_compare['SVM'] = accuracy
+print ("SVM kernel='sigmoid'" , accuracy)
+
+# MODEL 7 - Support Vector Machine
+accuracy = train_model(svm.SVC(degree=4), x_train, y_train, x_test)
+accuracy_compare['SVM'] = accuracy
+print ("SVM degree=4" , accuracy)
