@@ -64,4 +64,18 @@ sns.heatmap(correlations,
     fmt=".2f")
 plt.show()
 
+# uzupełnienie pustych wartości
+patients.fillna(patients.mean(), inplace=True)
+patientsCopy = patients.copy()
+print('Empty values filled!\n')
 
+# zbiór danych
+x = patients.drop('Level', axis=1).to_numpy()
+print('Set of important data:\n', x)
+
+# zbiór etykiet
+y = patients.loc[:, 'Level'].to_numpy()
+print('Set of labels:\n', y)
+
+# podział zbioru na dane treningowe i testowe
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=12345) 
