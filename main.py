@@ -144,3 +144,19 @@ print("SVM kernel='sigmoid'", accuracy)
 accuracy = train_model(svm.SVC(degree=3), x_train, y_train, x_test)
 accuracy_compare['SVM'] = accuracy
 print("SVM degree=4", accuracy)
+
+
+# create model instance
+svm_model = svm.SVC()
+svm_model.fit(x_train, y_train)
+# new data to make predictions on
+new_patient = np.array([51, 4, 2, 4, 5, 5, 7, 7])
+new_patient = new_patient.reshape(1, -1)
+
+# make predictions on the new data
+predictions = svm_model.predict(new_patient)
+
+if predictions == 1:
+    print("ML Model predicts that patient with near 100 percent certainty has lung cancer!")
+else:
+    print("ML Model predicts that patient with near 100 percent certainty hasn't got lung cancer!")
