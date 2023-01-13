@@ -8,7 +8,7 @@ class MLModelUseCase:
         self.y_train = y_train
 
     def start(self):
-        new_patient = np.array([51, 4, 2, 4, 5, 5, 7, 7])
+        new_patient = np.array([51, 4, 2, 4, 5, 2, 3, 3])
         new_patient = new_patient.reshape(1, -1)
         self.predict_if_patient_has_lung_cancer(new_patient)
 
