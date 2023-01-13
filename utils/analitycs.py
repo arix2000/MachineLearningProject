@@ -1,3 +1,4 @@
+import matplotlib.ticker as ticker
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
@@ -28,16 +29,17 @@ class Analytics:
         plt.ylabel("number of people")
         title = 'GENDER DISTRIBUTION'
         gender_dist.set_title(title)
-        plt.gca().set_xticklabels(['Male', 'Female'])
+        plt.gca().xaxis.set_major_locator(ticker.FixedLocator([1, 2]))
+        plt.gca().set_xticklabels(['0', '1'])
         plt.xticks(np.arange(min(self.patients['Gender']), max(self.patients['Gender']) + 1, 1))
         plt.show()
 
     def show_smokers_histogram(self):
-        cancer_risk = self.patients['Smoking'].hist(bins=7)
+        smokers_hist = self.patients['Smoking'].hist(bins=7)
         title = 'SMOKERS IN THE RESEARCH GROUP'
         plt.xlabel("level of smoking")
         plt.ylabel("number of people")
-        cancer_risk.set_title(title)
+        smokers_hist.set_title(title)
         plt.show()
 
     def show_age_distribution(self):

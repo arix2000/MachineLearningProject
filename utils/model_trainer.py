@@ -4,7 +4,7 @@ from sklearn.neural_network import MLPClassifier
 
 class ModelTrainer:
     accuracy_compare = None
-    max_iterations = 250
+    max_iterations = 1000
     svm_key = 'SVM'
 
     def __init__(self, x_train, x_test, y_train, y_test):
