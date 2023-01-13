@@ -1,8 +1,7 @@
-# import wykorzystywanych bibliotek
 from sklearn.model_selection import train_test_split
 
 from utils.analitycs import Analytics, show_model_comparison
-from utils.data_importer import get_patients, drop_useless_from, fill_empty_values
+from utils.data_manager import get_patients, drop_useless_from, fill_empty_values
 from utils.ml_model_use_case import MLModelUseCase
 from utils.model_trainer import ModelTrainer
 

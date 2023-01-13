@@ -1,15 +1,16 @@
 import pandas as pd
+from pandas import DataFrame
 
 
-def get_patients():
-    patients = pd.read_csv('data/cancer_patient_data_sets.csv')
+def get_patients() -> DataFrame:
+    patients: DataFrame = pd.read_csv('data/cancer_patient_data_sets.csv')
     patients = patients.replace(to_replace="Low", value=0)
     patients = patients.replace(to_replace="Medium", value=0)
     patients = patients.replace(to_replace="High", value=1)
     return patients
 
 
-def drop_useless_from(patients):
+def drop_useless_from(patients: DataFrame):
     patients.drop(
         ['index', 'Patient Id', 'OccuPational Hazards', 'Genetic Risk', 'chronic Lung Disease', 'Balanced Diet',
          'Obesity',
