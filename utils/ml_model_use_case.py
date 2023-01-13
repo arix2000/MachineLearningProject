@@ -9,17 +9,17 @@ class MLModelUseCase:
 
     def start(self):
         age = input("Enter patient age: ")
-        gender = input("Enter gender (male/female)")
+        gender = input("Enter gender (male/female): ")
         if gender == "male":
             gender = 1
         else:
             gender = 2
-        air_pollution = input("What is the air pollution at the patient's place of residence? (1-7) ")
-        alcohol_use = input("How much alcohol the patient is using? (1-7) ")
-        dust_allergy = input("Enter the level of dust allergy of the patient. (1-7) ")
-        smoking = input("How much does the patient smoke? (1-7) ")
-        passive_smoker = input("How often the patient is around smokers? (1-7) ")
-        snoring = input("How often does the patient snore? (1-7) ")
+        air_pollution = input("What is the air pollution at the patient's place of residence? (1-8) ")
+        alcohol_use = input("How much alcohol the patient is using? (1-8) ")
+        dust_allergy = input("Enter the level of dust allergy of the patient. (1-8) ")
+        smoking = input("How much does the patient smoke? (1-8) ")
+        passive_smoker = input("How often the patient is around smokers? (1-8) ")
+        snoring = input("How often does the patient snore? (1-8) ")
 
         new_patient = np.array(
             [age, gender, air_pollution, alcohol_use, dust_allergy, smoking, passive_smoker, snoring])
