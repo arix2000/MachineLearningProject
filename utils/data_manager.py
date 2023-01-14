@@ -5,8 +5,8 @@ from pandas import DataFrame
 def get_patients() -> DataFrame:
     patients: DataFrame = pd.read_csv('data/cancer_patient_data_sets.csv')
     patients = patients.replace(to_replace="Low", value=0)
-    patients = patients.replace(to_replace="Medium", value=0)
-    patients = patients.replace(to_replace="High", value=1)
+    patients = patients.replace(to_replace="Medium", value=1)
+    patients = patients.replace(to_replace="High", value=2)
     return patients
 
 

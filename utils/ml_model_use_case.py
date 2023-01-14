@@ -30,9 +30,11 @@ class MLModelUseCase:
         svm_model = svm.SVC(degree=3)
         svm_model.fit(self.x_train, self.y_train)
         predictions = svm_model.predict(new_patient)
-        if predictions == 1:
-            print("ML Model predicts that patient with near 100 percent certainty has lung cancer!")
-        elif predictions == 0:
-            print("ML Model predicts that patient with near 100 percent certainty hasn't got lung cancer!")
+        if predictions == 0:
+            print("There is a LOW risk of lung cancer for that patient!")
+        elif predictions == 1:
+            print("There is a MEDIUM risk of lung cancer for that patient!")
+        elif predictions == 2:
+            print("There is a HIGH probability of lung cancer for that patient!")
         else:
             print("Result outside the expected result set...")
