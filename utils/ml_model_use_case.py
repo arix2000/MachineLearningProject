@@ -32,5 +32,7 @@ class MLModelUseCase:
         predictions = svm_model.predict(new_patient)
         if predictions == 1:
             print("ML Model predicts that patient with near 100 percent certainty has lung cancer!")
-        else:
+        elif predictions == 0:
             print("ML Model predicts that patient with near 100 percent certainty hasn't got lung cancer!")
+        else:
+            print("Result outside the expected result set...")
