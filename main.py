@@ -1,6 +1,6 @@
 from sklearn.model_selection import train_test_split
 
-from utils.analitycs import Analytics, show_model_comparison
+from utils.analitycs import Analytics
 from utils.data_manager import get_patients, drop_useless_from, fill_empty_values
 from utils.ml_model_use_case import MLModelUseCase
 from utils.model_trainer import ModelTrainer
@@ -13,19 +13,19 @@ analytics = Analytics(patients)
 
 analytics.print_overall_data_info()
 
-analytics.is_there_any_nulls()
+print(analytics.is_there_any_nulls())
 
-analytics.show_gender_distribution()
+analytics.gender_distribution().show()
 
-analytics.show_smokers_histogram()
+analytics.smokers_histogram().show()
 
-analytics.show_age_distribution()
+analytics.age_distribution().show()
 
 drop_useless_from(patients)
 print(patients.head())
 print('Unneccesary data deleted!')
 
-analytics.show_correlation_matrix()
+analytics.correlation_matrix().show()
 
 fill_empty_values(patients)
 
@@ -40,7 +40,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_
 model_trainer = ModelTrainer(x_train, x_test, y_train, y_test)
 accuracy_compare = model_trainer.get_trained_models_comparison()
 
-show_model_comparison(accuracy_compare)
+analytics.model_comparison(accuracy_compare).show()
 
 model_trainer.correct_models()
 
