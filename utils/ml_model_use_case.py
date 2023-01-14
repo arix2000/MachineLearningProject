@@ -27,7 +27,7 @@ class MLModelUseCase:
         self.predict_if_patient_has_lung_cancer(new_patient)
 
     def predict_if_patient_has_lung_cancer(self, new_patient):
-        svm_model = svm.SVC(degree=3)
+        svm_model = svm.SVC(gamma='auto')
         svm_model.fit(self.x_train, self.y_train)
         predictions = svm_model.predict(new_patient)
         if predictions == 0:

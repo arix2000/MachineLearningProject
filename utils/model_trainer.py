@@ -48,7 +48,7 @@ class ModelTrainer:
         # działania korygujące - zastosowanie sieci neuronowej
 
         # MODEL 4 - neural network
-        mlp = MLPClassifier(hidden_layer_sizes=(8, 6, 2), max_iter=self.max_iterations)
+        mlp = MLPClassifier(hidden_layer_sizes=(10, 6, 4), max_iter=self.max_iterations)
         accuracy = self.train_model(mlp, self.x_train, self.y_train, self.x_test)
         self.accuracy_compare['neural network'] = accuracy
         print("neural network", accuracy)
@@ -56,8 +56,19 @@ class ModelTrainer:
         # działania korygujące - hiperparametry
 
         # MODEL 5 - Support Vector Machine
-        self.correct_svm_model(ensemble.RandomForestClassifier(n_estimators=3, max_depth=5),
-                               "Decreased number of estimatots and depth.")
+        accuracy = self.train_model(svm.SVC(gamma='auto'), self.x_train, self.y_train, self.x_test)
+        self.accuracy_compare['SVM'] = accuracy
+        print("SVM gamma='auto'", accuracy)
+
+        # MODEL 6 - Support Vector Machine
+        accuracy = self.train_model(svm.SVC(kernel='sigmoid'), self.x_train, self.y_train, self.x_test)
+        self.accuracy_compare['SVM'] = accuracy
+        print("SVM kernel='sigmoid'", accuracy)
+
+        # MODEL 7 - Support Vector Machine
+        accuracy = self.train_model(svm.SVC(degree=4), self.x_train, self.y_train, self.x_test)
+        self.accuracy_compare['SVM'] = accuracy
+        print("SVM degree=4", accuracy)
 
     def correct_svm_model(self, classifier, print_text):
         accuracy = self.train_model(classifier, self.x_train, self.y_train, self.x_test)
