@@ -4,7 +4,7 @@ from sklearn.neural_network import MLPClassifier
 
 class ModelTrainer:
     accuracy_compare = None
-    max_iterations = 1200
+    max_iterations = 800
     svm_key = 'SVM'
 
     def __init__(self, x_train, x_test, y_train, y_test):
@@ -25,7 +25,7 @@ class ModelTrainer:
 
     def get_trained_models_comparison(self):
         # MODEL 1 - regresja logistyczna
-        accuracy = self.train_model(linear_model.LogisticRegression(max_iter=self.max_iterations), self.x_train,
+        accuracy = self.train_model(linear_model.LogisticRegression(), self.x_train,
                                     self.y_train,
                                     self.x_test)
         accuracy_compare = {'LR': accuracy}
@@ -37,7 +37,7 @@ class ModelTrainer:
         print("SVM:", accuracy)
 
         # MODEL 3 - Random Forest Tree
-        accuracy = self.train_model(ensemble.RandomForestClassifier(n_estimators=1, max_depth=1), self.x_train,
+        accuracy = self.train_model(ensemble.RandomForestClassifier(), self.x_train,
                                     self.y_train, self.x_test)
         accuracy_compare['RF'] = accuracy
         print("RF: ", accuracy)
@@ -48,7 +48,7 @@ class ModelTrainer:
         # działania korygujące - zastosowanie sieci neuronowej
 
         # MODEL 4 - neural network
-        mlp = MLPClassifier(hidden_layer_sizes=(10, 5, 2), max_iter=self.max_iterations)
+        mlp = MLPClassifier(hidden_layer_sizes=(8, 6, 2), max_iter=self.max_iterations)
         accuracy = self.train_model(mlp, self.x_train, self.y_train, self.x_test)
         self.accuracy_compare['neural network'] = accuracy
         print("neural network", accuracy)
@@ -56,13 +56,8 @@ class ModelTrainer:
         # działania korygujące - hiperparametry
 
         # MODEL 5 - Support Vector Machine
-        self.correct_svm_model(svm.SVC(), "SVM gamma='auto'")
-
-        # MODEL 6 - Support Vector Machine
-        self.correct_svm_model(svm.SVC(kernel='sigmoid'), "SVM kernel='sigmoid'")
-
-        # MODEL 7 - Support Vector Machine
-        self.correct_svm_model(svm.SVC(degree=3), "SVM degree=3")
+        self.correct_svm_model(ensemble.RandomForestClassifier(n_estimators=3, max_depth=5),
+                               "Decreased number of estimatots and depth.")
 
     def correct_svm_model(self, classifier, print_text):
         accuracy = self.train_model(classifier, self.x_train, self.y_train, self.x_test)
