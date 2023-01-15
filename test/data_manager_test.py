@@ -14,8 +14,8 @@ class DataManagerTest(unittest.TestCase):
         drop_useless_from(self.patients)
         print(self.patients.columns.to_list())
         self.assertListEqual(self.patients.columns.to_list(),
-                             ['Age', 'Gender', 'Air Pollution', 'Alcohol use', 'Dust Allergy', 'Smoking',
-                              'Passive Smoker', 'Snoring', 'Level'])
+                             ['Age', 'Gender', 'Air Pollution', 'Alcohol use', 'Genetic Risk',
+                              'chronic Lung Disease', 'Smoking', 'Passive Smoker', 'Level'])
 
     def test_fill_empty_values(self):
         fill_empty_values(self.data_with_empty_values)
