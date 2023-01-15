@@ -1,9 +1,9 @@
 import warnings
 
-warnings.filterwarnings('ignore')
-
 from sklearn import metrics, linear_model, svm, ensemble
 from sklearn.neural_network import MLPClassifier
+
+warnings.filterwarnings('ignore')
 
 
 class ModelTrainer:
