@@ -4,6 +4,8 @@ from utils.analitycs import Analytics
 from utils.data_manager import get_patients, drop_useless_from, fill_empty_values
 from utils.ml_model_use_case import MLModelUseCase
 from utils.model_trainer import ModelTrainer
+import warnings
+warnings.filterwarnings("ignore")
 
 patients = get_patients()
 print(patients.head())

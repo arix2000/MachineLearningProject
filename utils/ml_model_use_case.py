@@ -16,13 +16,14 @@ class MLModelUseCase:
             gender = 2
         air_pollution = input("What is the air pollution at the patient's place of residence? (1-8) ")
         alcohol_use = input("How much alcohol the patient is using? (1-8) ")
-        dust_allergy = input("Enter the level of dust allergy of the patient. (1-8) ")
+        genetic_risk = input("Enter the level of genetic risk of the patient. (1-8) ")
+        chronic_lung_disease = input("Enter the level of chronic lung disease. (1-8) ")
         smoking = input("How much does the patient smoke? (1-8) ")
         passive_smoker = input("How often the patient is around smokers? (1-8) ")
-        snoring = input("How often does the patient snore? (1-8) ")
 
         new_patient = np.array(
-            [age, gender, air_pollution, alcohol_use, dust_allergy, smoking, passive_smoker, snoring])
+            [age, gender, air_pollution, alcohol_use, genetic_risk, chronic_lung_disease,
+             smoking, passive_smoker])
         new_patient = new_patient.reshape(1, -1)
         self.predict_if_patient_has_lung_cancer(new_patient)
 

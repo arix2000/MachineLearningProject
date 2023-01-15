@@ -41,7 +41,7 @@ class ModelTrainer:
         return accuracy_compare
 
     def correct_models(self):
-        mlp = MLPClassifier(hidden_layer_sizes=(10, 6, 4), max_iter=1400)
+        mlp = MLPClassifier(hidden_layer_sizes=(10, 5, 3), max_iter=1400)
         accuracy = self.train_model(mlp, self.x_train, self.y_train, self.x_test)
         self.accuracy_compare['neural network'] = accuracy
         print("neural network", accuracy)
