@@ -1,10 +1,13 @@
+import warnings
+
+warnings.filterwarnings('ignore')
+
 from sklearn import metrics, linear_model, svm, ensemble
 from sklearn.neural_network import MLPClassifier
 
 
 class ModelTrainer:
     accuracy_compare = {}
-    max_iterations = 800
     svm_key = 'SVM'
 
     def __init__(self, x_train, x_test, y_train, y_test):
@@ -20,7 +23,7 @@ class ModelTrainer:
         return score_vals
 
     def get_trained_models_comparison(self):
-        accuracy = self.train_model(linear_model.LogisticRegression(), self.x_train,
+        accuracy = self.train_model(linear_model.LogisticRegression(max_iter=500), self.x_train,
                                     self.y_train,
                                     self.x_test)
         accuracy_compare = {'LR': accuracy}
@@ -30,7 +33,7 @@ class ModelTrainer:
         accuracy_compare['SVM'] = accuracy
         print("SVM:", accuracy)
 
-        accuracy = self.train_model(ensemble.RandomForestClassifier(), self.x_train,
+        accuracy = self.train_model(ensemble.RandomForestClassifier(max_depth=1), self.x_train,
                                     self.y_train, self.x_test)
         accuracy_compare['RF'] = accuracy
         print("RF: ", accuracy)
@@ -38,7 +41,7 @@ class ModelTrainer:
         return accuracy_compare
 
     def correct_models(self):
-        mlp = MLPClassifier(hidden_layer_sizes=(10, 6, 4), max_iter=self.max_iterations)
+        mlp = MLPClassifier(hidden_layer_sizes=(10, 6, 4), max_iter=1400)
         accuracy = self.train_model(mlp, self.x_train, self.y_train, self.x_test)
         self.accuracy_compare['neural network'] = accuracy
         print("neural network", accuracy)
