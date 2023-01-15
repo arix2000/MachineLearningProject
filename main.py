@@ -11,8 +11,6 @@ print("Data imported correctly.")
 
 analytics = Analytics(patients)
 
-analytics.print_overall_data_info()
-
 print(analytics.is_there_any_nulls())
 
 analytics.gender_distribution().show()
@@ -22,8 +20,8 @@ analytics.smokers_histogram().show()
 analytics.age_distribution().show()
 
 drop_useless_from(patients)
-print(patients.head())
-print('Unneccesary data deleted!')
+
+analytics.print_overall_data_info()
 
 analytics.correlation_matrix().show()
 

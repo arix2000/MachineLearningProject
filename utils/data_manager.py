@@ -12,11 +12,11 @@ def get_patients() -> DataFrame:
 
 def drop_useless_from(patients: DataFrame):
     patients.drop(
-        ['index', 'Patient Id', 'OccuPational Hazards', 'Genetic Risk', 'chronic Lung Disease', 'Balanced Diet',
+        ['index', 'Patient Id', 'OccuPational Hazards', 'Balanced Diet',
          'Obesity',
          'Chest Pain', 'Coughing of Blood', 'Fatigue', 'Weight Loss', 'Shortness of Breath', 'Wheezing',
          'Swallowing Difficulty',
-         'Clubbing of Finger Nails', 'Frequent Cold', 'Dry Cough'], axis=1, inplace=True)
+         'Clubbing of Finger Nails', 'Frequent Cold', 'Dry Cough', 'Snoring', 'Dust Allergy'], axis=1, inplace=True)
 
 
 def fill_empty_values(patients):
